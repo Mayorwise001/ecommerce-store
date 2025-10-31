@@ -1,0 +1,91 @@
+/* src/styles/Breadcrumbs.css */
+
+/* === Container Styling === */
+.breadcrumb-container {
+  font-size: 0.95rem;
+  margin: 10px 0 20px;
+  padding: 8px 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* === Breadcrumb List === */
+.breadcrumb-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  gap: 4px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  color: #555;
+  font-weight: 500;
+}
+
+/* === Default Breadcrumb Link === */
+.breadcrumb-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #f75b1c;
+  text-decoration: underline;
+}
+
+/* ✅ Remove color & underline for HOME link */
+.breadcrumb-item:first-child .breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.breadcrumb-item:first-child .breadcrumb-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ✅ Remove underline & blue color for PRODUCT link */
+.breadcrumb-item:nth-child(2) .breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.breadcrumb-item:nth-child(2) .breadcrumb-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* === Breadcrumb Separator === */
+.breadcrumb-separator {
+  margin: 0 6px;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* === Current Page Styling === */
+.breadcrumb-current {
+  color: #f75b1c;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* === Dark Mode === */
+body.dark-mode .breadcrumb-container {
+  background: #222;
+  color: var(--text-color);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .breadcrumb-link:hover {
+  color: #ffa94d;
+}

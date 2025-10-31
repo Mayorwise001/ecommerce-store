@@ -1,0 +1,92 @@
+
+/* 🌙 Light & Dark Mode Base Variables (match Navbar) */
+body {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --card-bg: #fff;
+  --summary-bg: #f9f9f9;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --border-color: #eee;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --card-bg: #1e1e1e;
+  --summary-bg: #1c1c1c;
+  --button-bg: #ff7300;
+  --button-hover: #ff5500;
+  --border-color: #333;
+}
+
+
+
+.wishlist-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.wishlist-item {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+
+body.dark-mode .wishlist-grid .wishlist-item {
+   color: var(--text-color);
+   background-color: rgb(27, 27, 27);
+   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  opacity: 1;
+}
+
+
+.wishlist-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.wishlist-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove-btn {
+  background: red;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.clear-wishlist-btn {
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}

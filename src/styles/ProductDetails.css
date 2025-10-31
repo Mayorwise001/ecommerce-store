@@ -1,0 +1,140 @@
+.product-details-container {
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-btn-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  color: #fff;
+  background-color: #000;
+  padding: 8px 15px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #222;
+}
+
+.product-details-card {
+  display: flex;
+  gap: 40px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product-details-image {
+  flex: 1 1 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-details-image img {
+  width: 100%;
+  max-width: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-details-image img:hover {
+  transform: scale(1.05);
+}
+
+.product-details-info {
+  flex: 1 1 450px;
+}
+
+.product-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.product-category span {
+  font-weight: 600;
+  color: #333;
+}
+
+.product-description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.product-meta {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.product-rating {
+  color: #f4a261;
+  font-weight: 500;
+}
+
+.cart-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.cart-action-btn.add {
+  background-color: #000;
+  color: #fff;
+}
+
+.cart-action-btn.remove {
+  background-color: #e63946;
+  color: #fff;
+}
+
+.cart-action-btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .product-details-card {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .product-details-image img {
+    max-width: 300px;
+  }
+
+  .product-title {
+    font-size: 1.4rem;
+  }
+}

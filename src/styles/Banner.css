@@ -1,0 +1,53 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Floating Shop Now Icon */
+.shop-now-icon {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.55);
+  color: #111;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  animation: floatUpDown 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon hover effect */
+.shop-now-icon:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  background: #111;
+  color: #fff;
+}
+
+/* Up and down floating animation */
+@keyframes floatUpDown {
+  0% {
+    transform: translate(-50%, -48%);
+  }
+  50% {
+    transform: translate(-50%, -55%);
+  }
+  100% {
+    transform: translate(-50%, -48%);
+  }
+}

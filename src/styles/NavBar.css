@@ -1,0 +1,273 @@
+/* 🌙 Light mode (default) */
+body {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --nav-bg: #f8f8f8;
+  --icon-color: #333;
+  --accent-color: orange;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* 🌑 Dark mode */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --nav-bg: #1e1e1e;
+  --icon-color: #f1f1f1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Apply vars to navbar */
+.navbar {
+  background-color: var(--nav-bg);
+  color: var(--text-color);
+}
+
+/* Icon colors */
+.nav-icon {
+  color: var(--icon-color);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background-color: #000000; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.navbar-left .navbar-logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-logo-link{
+  text-decoration: none;
+ 
+}
+
+
+.navbar-center {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.navbar-search {
+  width: 100%;
+  padding: 8px 40px 8px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  cursor: pointer;
+}
+
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Shift icons to the left */
+  gap: 1rem;
+  width: 100%;
+  max-width: 250px; /* Control width */
+  overflow: hidden; /* Prevent overflow */
+}
+
+
+
+
+
+.nav-icon {
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+  color: #fff8f0;
+}
+
+/* === CART WRAPPER STYLING === */
+.cart-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === CART ICON COUNT BADGE === */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #e63946; /* 🔴 Bright red for visibility */
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  animation: popIn 0.3s ease;
+}
+
+/* === SMALL ANIMATION WHEN COUNT UPDATES === */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* === OPTIONAL: MAKE CART ICON REACT ON HOVER === */
+.cart-wrapper:hover .nav-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  max-height: 240px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+}
+
+
+
+.search-suggestion-item {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none; /* 👈 removes the underline */
+}
+
+.search-suggestion-item:hover {
+  background: #f5f5f5;
+  color: #000;
+  text-decoration: none;
+}
+
+.search-suggestions li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  transition: background 0.2s ease;
+
+ 
+}
+
+.search-suggestions li:hover {
+  background: #f5f5f5;
+
+}
+
+.search-suggestions img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.search-suggestions span {
+  font-size: 0.9rem;
+  color: #333;
+
+}
+
+
+/* Wishlist badge */
+.wishlist-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.wishlist-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #ff4757;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+
+
+@media (max-width: 868px) {
+ .navbar-center {
+  max-width: 180px;
+
+}
+  }
+
+@media (max-width: 568px) {
+  .navbar-center {
+    max-width: 100px; /* smaller search field */
+  }
+
+  .navbar-search {
+    font-size: 12px; /* smaller text */
+    padding: 6px; /* less padding */
+  }
+
+
+  }
+
+  
