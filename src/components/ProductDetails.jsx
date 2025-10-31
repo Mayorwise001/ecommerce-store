@@ -15,7 +15,8 @@ function ProductDetails() {
   const isProductInCart = (id) => cartItems.some((item) => item.id === id);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
+    // fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`https://backend-8ivf.onrender.com/api/products/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch product details");
         return res.json();

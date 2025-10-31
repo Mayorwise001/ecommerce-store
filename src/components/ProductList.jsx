@@ -23,7 +23,8 @@ function ProductList() {
 
   useEffect(() => {
     // ✅ Fetch from your backend API instead of fakestoreapi
-    fetch("http://localhost:5000/api/products")
+    // fetch("http://localhost:5000/api/products")
+    fetch("https://backend-8ivf.onrender.com/api/products")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch products");
         return res.json();
