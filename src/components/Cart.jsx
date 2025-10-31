@@ -1,7 +1,7 @@
 // src/components/Cart.js
 import React from 'react';
 import { useCart } from './CartContext';
-import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa6';
 import '../styles/Cart.css'; // You will need to create this CSS file
 import { Link } from "react-router-dom"; 
 
