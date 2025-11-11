@@ -18,12 +18,12 @@ function ProductList() {
   const { cartItems, addItemToCart, clearItemFromCart, searchTerm } = useCart();
   const { addToWishlist, removeFromWishlist, wishlistItems } = useWishlist();
 
-  const isProductInCart = (id) => cartItems.some((item) => item.id === id);
-  const isInWishlist = (id) => wishlistItems.some((w) => w.id === id);
+  // ✅ FIXED: Use _id for MongoDB-based products
+  const isProductInCart = (id) => cartItems.some((item) => item._id === id);
+  const isInWishlist = (id) => wishlistItems.some((w) => w._id === id);
 
   useEffect(() => {
     // ✅ Fetch from your backend API instead of fakestoreapi
-    // fetch("http://localhost:5000/api/products")
     fetch("https://backend-8ivf.onrender.com/api/products")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch products");
@@ -51,28 +51,17 @@ function ProductList() {
 
   // ✅ Combine search + category filter
   const visibleProducts = products.filter((p) => {
-    // const title = p.name?.toLowerCase() || "";
-    // const category = p.category?.toLowerCase() || "";
+    const matchesSearch =
+      p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.categories?.some((c) =>
+        c.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
-    // const matchesSearch =
-    //   title.includes(searchTerm.toLowerCase()) ||
-    //   category.includes(searchTerm.toLowerCase());
-
-    // const matchesCategory =
-    //   selectedCategory === "All" ||
-    //   category === selectedCategory.toLowerCase();
-// ✅ Handle category arrays properly
-const matchesSearch =
-  p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  p.categories?.some((c) =>
-    c.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-const matchesCategory =
-  selectedCategory === "All" ||
-  p.categories?.some(
-    (c) => c.toLowerCase() === selectedCategory.toLowerCase()
-  );
+    const matchesCategory =
+      selectedCategory === "All" ||
+      p.categories?.some(
+        (c) => c.toLowerCase() === selectedCategory.toLowerCase()
+      );
 
     return matchesSearch && matchesCategory;
   });
@@ -117,109 +106,159 @@ const matchesCategory =
           <div className="deal-card-wrapper" key={p._id}>
             <Link to={`/product/${p._id}`} className="deal-card">
               <div className="deal-img-wrapper">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                />
+                <img src={p.image} alt={p.title} loading="lazy" />
               </div>
             </Link>
 
-              <div className="deal-info">
-                <p className="deal-title">{p.name}</p>
-                <p className="deal-title">{p.title}</p>
+            <div className="deal-info">
+              <p className="deal-title">{p.name}</p>
+              <p className="deal-title">{p.title}</p>
 
-                {/* ⭐ Placeholder Rating */}
-                {/* <div className="product-rating">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <span key={i} className="star filled">★</span>
-                  ))}
-                  <span className="rating-value">5.0</span>
-                  <span className="rating-count">(10)</span>
-                </div> */}
-<div className="product-rating">
-  {p.rating && p.rating.rate ? (
-    <>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span
-          key={i}
-          className={`star ${i < Math.round(p.rating.rate) ? "filled" : ""}`}
-        >
-          ★
-        </span>
-      ))}
-      <span className="rating-value">{p.rating.rate.toFixed(1)}</span>
-      <span className="rating-count">
-        ({p.rating.count || 0})
-      </span>
-    </>
+              <div className="product-rating">
+                {p.rating && p.rating.rate ? (
+                  <>
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span
+                        key={i}
+                        className={`star ${
+                          i < Math.round(p.rating.rate) ? "filled" : ""
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                    <span className="rating-value">
+                      {p.rating.rate.toFixed(1)}
+                    </span>
+                    <span className="rating-count">
+                      ({p.rating.count || 0})
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span key={i} className="star filled">
+                        ★
+                      </span>
+                    ))}
+                    <span className="rating-value">5.0</span>
+                    <span className="rating-count">(10)</span>
+                  </>
+                )}
+              </div>
+
+              <div className="price-cart">
+                <p className="deal-price">₦{p.price?.toFixed(2)}</p>
+
+                {/* 🛒 CART BUTTON */}
+                {/* <button
+                  className="cart-btn"
+                  onClick={() =>
+                    isProductInCart(p._id)
+                      ? clearItemFromCart(p._id)
+                      : addItemToCart(p)
+                  }
+                  aria-label={
+                    isProductInCart(p._id)
+                      ? "Remove from cart"
+                      : "Add to cart"
+                  }
+                >
+                  {isProductInCart(p._id) ? (
+                    <FaTimes className="cart-icon remove" />
+                  ) : (
+                    <FaCartPlus className="cart-icon add" />
+                  )}
+                </button> */}
+
+                {/* 🛒 CART BUTTON */}
+<button
+  className="cart-btn"
+  onClick={() => {
+    const product = { ...p, id: p._id }; // ✅ normalize MongoDB _id → id
+
+    if (isProductInCart(product.id)) {
+      clearItemFromCart(product.id); // ✅ Remove product if already in cart
+    } else {
+      addItemToCart(product); // ✅ Add new product
+    }
+  }}
+  aria-label={
+    isProductInCart(p._id) ? "Remove from cart" : "Add to cart"
+  }
+>
+  {isProductInCart(p._id) ? (
+    <FaTimes className="cart-icon remove" />
   ) : (
-    <>
-      {/* ⭐ Placeholder Rating */}
-      {Array.from({ length: 5 }, (_, i) => (
-        <span key={i} className="star filled">★</span>
-      ))}
-      <span className="rating-value">5.0</span>
-      <span className="rating-count">(10)</span>
-    </>
+    <FaCartPlus className="cart-icon add" />
   )}
-</div>
+</button>
 
-                <div className="price-cart">
-                  <p className="deal-price">₦{p.price?.toFixed(2)}</p>
 
-                  {/* 🛒 CART BUTTON */}
-                  <button
-                    className="cart-btn"
-                    onClick={() =>
-                      isProductInCart(p._id)
-                        ? clearItemFromCart(p._id)
-                        : addItemToCart(p)
+                {/* 🧡 WISHLIST BUTTON */}
+                {/* <button
+                  className="wishlist-btn"
+                  onClick={() => {
+                    if (isInWishlist(p._id)) {
+                      removeFromWishlist(p._id);
+                      toast.error("💔 Removed from Wishlist!", {
+                        position: "top-center",
+                        autoClose: 1500,
+                      });
+                    } else {
+                      addToWishlist(p);
+                      toast.success("🧡 Added to Wishlist!", {
+                        position: "top-center",
+                        autoClose: 1500,
+                      });
                     }
-                    aria-label={
-                      isProductInCart(p._id)
-                        ? "Remove from cart"
-                        : "Add to cart"
-                    }
-                  >
-                    {isProductInCart(p._id) ? (
-                      <FaTimes className="cart-icon remove" />
-                    ) : (
-                      <FaCartPlus className="cart-icon add" />
-                    )}
-                  </button>
-
-                  {/* 🧡 WISHLIST BUTTON */}
-                  <button
-                    className="wishlist-btn"
-                    onClick={() => {
-                      if (isInWishlist(p._id)) {
-                        removeFromWishlist(p._id);
-                        toast.error("💔 Removed from Wishlist!", {
-                          position: "top-center",
-                          autoClose: 1500,
-                        });
-                      } else {
-                        addToWishlist(p);
-                        toast.success("🧡 Added to Wishlist!", {
-                          position: "top-center",
-                          autoClose: 1500,
-                        });
-                      }
+                  }}
+                >
+                  <span
+                    style={{
+                      color: isInWishlist(p._id) ? "orange" : "lightgray",
+                      fontSize: "1.3rem",
+                      transition: "color 0.3s ease, transform 0.2s ease",
                     }}
                   >
-                    <span
-                      style={{
-                        color: isInWishlist(p._id) ? "orange" : "lightgray",
-                        fontSize: "1.3rem",
-                        transition: "color 0.3s ease, transform 0.2s ease",
-                      }}
-                    >
-                      {isInWishlist(p._id) ? "🧡" : "🤍"}
-                    </span>
-                  </button>
-                </div>
+                    {isInWishlist(p._id) ? "🧡" : "🤍"}
+                  </span>
+                </button> */}
+                {/* 🧡 WISHLIST BUTTON */}
+<button
+  className="wishlist-btn"
+  onClick={() => {
+    // normalize product id so context can read it
+    const product = { ...p, id: p._id };
+
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+      toast.error("💔 Removed from Wishlist!", {
+        position: "top-center",
+        autoClose: 1500,
+      });
+    } else {
+      addToWishlist(product);
+      toast.success("🧡 Added to Wishlist!", {
+        position: "top-center",
+        autoClose: 1500,
+      });
+    }
+  }}
+>
+  <span
+    style={{
+      color: isInWishlist(p._id) ? "orange" : "lightgray",
+      fontSize: "1.3rem",
+      transition: "color 0.3s ease, transform 0.2s ease",
+    }}
+  >
+    {isInWishlist(p._id) ? "🧡" : "🤍"}
+  </span>
+</button>
+
               </div>
+            </div>
           </div>
         ))}
       </div>
@@ -228,8 +267,3 @@ const matchesCategory =
 }
 
 export default ProductList;
-
-
-
-
-
