@@ -151,27 +151,7 @@ function ProductList() {
                 <p className="deal-price">₦{p.price?.toFixed(2)}</p>
 
                 {/* 🛒 CART BUTTON */}
-                {/* <button
-                  className="cart-btn"
-                  onClick={() =>
-                    isProductInCart(p._id)
-                      ? clearItemFromCart(p._id)
-                      : addItemToCart(p)
-                  }
-                  aria-label={
-                    isProductInCart(p._id)
-                      ? "Remove from cart"
-                      : "Add to cart"
-                  }
-                >
-                  {isProductInCart(p._id) ? (
-                    <FaTimes className="cart-icon remove" />
-                  ) : (
-                    <FaCartPlus className="cart-icon add" />
-                  )}
-                </button> */}
-
-                {/* 🛒 CART BUTTON */}
+                
 <button
   className="cart-btn"
   onClick={() => {
@@ -193,37 +173,6 @@ function ProductList() {
     <FaCartPlus className="cart-icon add" />
   )}
 </button>
-
-
-                {/* 🧡 WISHLIST BUTTON */}
-                {/* <button
-                  className="wishlist-btn"
-                  onClick={() => {
-                    if (isInWishlist(p._id)) {
-                      removeFromWishlist(p._id);
-                      toast.error("💔 Removed from Wishlist!", {
-                        position: "top-center",
-                        autoClose: 1500,
-                      });
-                    } else {
-                      addToWishlist(p);
-                      toast.success("🧡 Added to Wishlist!", {
-                        position: "top-center",
-                        autoClose: 1500,
-                      });
-                    }
-                  }}
-                >
-                  <span
-                    style={{
-                      color: isInWishlist(p._id) ? "orange" : "lightgray",
-                      fontSize: "1.3rem",
-                      transition: "color 0.3s ease, transform 0.2s ease",
-                    }}
-                  >
-                    {isInWishlist(p._id) ? "🧡" : "🤍"}
-                  </span>
-                </button> */}
                 {/* 🧡 WISHLIST BUTTON */}
 <button
   className="wishlist-btn"

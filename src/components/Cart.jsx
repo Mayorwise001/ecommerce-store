@@ -14,6 +14,9 @@ function Cart() {
         clearItemFromCart 
     } = useCart();
 
+
+
+
     // Helper to format currency
     const formatCurrency = (amount) => `₦${amount.toFixed(2)}`;
 
